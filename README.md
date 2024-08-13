@@ -36,7 +36,7 @@ for proxy in all_proxies['proxies']:
     if int(proxy.get("days_left")) < 5:
         order = instance.prolong_order(proxy_ids=[int(proxy.get("id"))], period=4)
         prolong_order_id = order.get('order_id')
-        prolong_cost = int(order.get('cost_total'))
+        prolong_cost = int(order.get('cost_tital'))
         if prolong_cost > balance:
             print('Не хватит денег :(')
         else:
