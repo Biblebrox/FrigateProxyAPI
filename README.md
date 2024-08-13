@@ -11,29 +11,29 @@
 
 Установите зависимости командой:
 
-\`\`\`bash
+```bash
 pip install -r req.txt
-\`\`\`
+```
 
 ## Использование
 
 ### Создание инстанса
 
-\`\`\`python
+```python
 from api import FrigateProxyAPI
 
 api_key = 'your_api_key'
 instance = FrigateProxyAPI(api_key)
-\`\`\`
+```
 
-### Пример получения всех прокси и их продления
+### Пример получения всех прокси и их продления если аренда закончится менее чем через 5 дней
 
-\`\`\`python
+```python
 all_proxies = instance.export_all_proxy_data()
 balance = int(instance.get_balance().get('balance'))
 
 for proxy in all_proxies['proxies']:
-    if int(proxy.get("days_left")) <= 5:
+    if int(proxy.get("days_left")) < 5:
         order = instance.prolong_order(proxy_ids=[int(proxy.get("id"))], period=4)
         prolong_order_id = order.get('order_id')
         prolong_cost = int(order.get('cost_total'))
@@ -43,7 +43,7 @@ for proxy in all_proxies['proxies']:
             print('Продлеваем прокси...')
             res_pay = instance.pay_order(order_id=int(prolong_order_id))
             print(res_pay)
-\`\`\`
+```
 
 ## Доступные методы
 
